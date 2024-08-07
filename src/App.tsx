@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import "./index.css";
-import { CsvImporter } from "@/components/csv-importer";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import Actions from "@/components/actions";
