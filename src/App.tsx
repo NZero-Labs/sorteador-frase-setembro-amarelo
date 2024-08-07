@@ -39,7 +39,7 @@ export default function App() {
       {isFinal && <Fireworks autorun={{ speed: 3 }} />}
       <header className="bg-white w-full h-[130px] flex items-center justify-center z-50 relative">
         <img
-          src="/logo.png"
+          src="logo.png"
           alt="Logo Amara"
           className="h-[100px] object-contain"
         />
@@ -96,7 +96,7 @@ export default function App() {
               <span className="bg-[#C1D116] px-3">INTERSOLAR!</span>
             </div>
             <img
-              src="/banner.png"
+              src="banner.png"
               alt="banner premiação"
               className="object-cover w-[350px]"
             />
