@@ -114,9 +114,9 @@ export function CsvImporter({
       {step === "upload" ? (
         <DialogContent className="p-8 sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle>Upload CSV</DialogTitle>
+            <DialogTitle>Importar CSV</DialogTitle>
             <DialogDescription>
-              Drag and drop your files here or click to browse.
+              Arraste e solte o arquivo ou clique nessa caixa.
             </DialogDescription>
           </DialogHeader>
           <FileUploader
@@ -137,9 +137,10 @@ export function CsvImporter({
         <DialogContent className="overflow-hidden p-8 sm:max-w-6xl">
           <div className="flex flex-col items-center gap-2 sm:flex-row">
             <DialogHeader className="flex-1">
-              <DialogTitle>Map fields</DialogTitle>
+              <DialogTitle>Mapear Campos</DialogTitle>
               <DialogDescription>
-                Map the CSV fields to the corresponding table fields.
+                Mapear campos onde determinará qual o nome e empresa do
+                concorrente
               </DialogDescription>
             </DialogHeader>
             <Button
@@ -150,7 +151,7 @@ export function CsvImporter({
                 setStep("upload");
               }}
             >
-              Reset
+              Resetar
             </Button>
           </div>
           <div className="grid h-[26.25rem] w-full overflow-hidden rounded-md border">
@@ -195,7 +196,7 @@ export function CsvImporter({
           </div>
           <DialogFooter className="gap-2 sm:space-x-0">
             <Button variant="outline" onClick={() => setStep("upload")}>
-              Back
+              Voltar
             </Button>
             <Button
               onClick={async () => {
@@ -205,7 +206,7 @@ export function CsvImporter({
                 setStep("upload");
               }}
             >
-              Import
+              Importar
             </Button>
           </DialogFooter>
         </DialogContent>
