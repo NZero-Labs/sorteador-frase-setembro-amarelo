@@ -272,7 +272,7 @@ function PreviewTableHead({
           <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
             <Command>
               <CommandInput placeholder="Search field..." />
-              <CommandEmpty>No field found.</CommandEmpty>
+              <CommandEmpty>Nenhum campo encontrado.</CommandEmpty>
               <CommandList>
                 <CommandGroup>
                   {[...new Set(Object.values(originalFieldMappings))].map(

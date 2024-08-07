@@ -217,7 +217,7 @@ export function FileUploader(props: FileUploaderProps) {
                   />
                 </div>
                 <p className="font-medium text-muted-foreground">
-                  Drop the files here
+                  Solte o arquivo aqui.
                 </p>
               </div>
             ) : (
@@ -230,16 +230,16 @@ export function FileUploader(props: FileUploaderProps) {
                 </div>
                 <div className="flex flex-col gap-px">
                   <p className="font-medium text-muted-foreground">
-                    Drag {`'n'`} drop files here, or click to select files
+                    Arraste e solte o arquivo ou clique nessa caixa.
                   </p>
                   <p className="text-sm text-muted-foreground/70">
-                    You can upload
+                    Você pode importar
                     {maxFileCount > 1
                       ? ` ${
                           maxFileCount === Infinity ? "multiple" : maxFileCount
                         }
-                      files (up to ${formatBytes(maxSize)} each)`
-                      : ` a file with ${formatBytes(maxSize)}`}
+                      arquivos com até ${formatBytes(maxSize)} cada`
+                      : `arquivo com até ${formatBytes(maxSize)}`}
                   </p>
                 </div>
               </div>
@@ -297,7 +297,7 @@ function FileCard({ file, progress, onRemove }: FileCardProps) {
           onClick={onRemove}
         >
           <Cross2Icon className="size-4" aria-hidden="true" />
-          <span className="sr-only">Remove file</span>
+          <span className="sr-only">Remover Arquivo</span>
         </Button>
       </div>
     </div>
