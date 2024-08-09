@@ -125,7 +125,7 @@ export default function App() {
         <img
           src="dah-logo.png"
           alt="Logo DAH"
-          className="h-[50px] object-contain bg-transparent mix-blend-multiply"
+          className="h-[48px] object-contain bg-transparent mix-blend-multiply"
         />
         <img
           src="hoymiles-logo.png"
