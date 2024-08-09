@@ -4,6 +4,7 @@ import "./index.css";
 import { Card } from "@/components/ui/card";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import Actions from "@/components/actions";
+import { useEventListener } from "@/hooks/use-event-listener";
 export type DataProps = Array<{
   name: string;
   corporation: string;
@@ -13,6 +14,8 @@ export default function App() {
   const [names, setNames] = useState<DataProps>([]);
   const [showEditor, setShowEditor] = useState(true);
   const [isFinal, setIsFinal] = useState(false);
+  const [cancelAnimation, setCancelAnimation] = useState(false);
+  console.log("🚀 ~ App ~ cancelAnimation:", cancelAnimation);
   const [isLoading, setIsLoading] = useState(false);
   const [autoCounter, setAutoCounter] = useState(5);
 
@@ -21,6 +24,7 @@ export default function App() {
     setIsFinal(false);
     setIsLoading(true);
     setShowEditor(false);
+    setCancelAnimation(false);
     setAutoCounter(5);
     const autoCounterInterval = setInterval(() => {
       setAutoCounter((v) => v - 1);
@@ -31,12 +35,21 @@ export default function App() {
       setIsLoading(false);
       clearInterval(autoCounterInterval);
       setAutoCounter(5);
+      const newNames = [...names];
+      newNames.splice(index, 1);
+      setNames(newNames);
     }, 5 * 1000);
   };
-
+  useEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      setCancelAnimation(false);
+    } else {
+      setCancelAnimation(true);
+    }
+  });
   return (
     <>
-      {isFinal && <Fireworks autorun={{ speed: 3 }} />}
+      {isFinal && !cancelAnimation && <Fireworks autorun={{ speed: 3 }} />}
       <header className="bg-white w-full h-[130px] flex items-center justify-center z-50 relative">
         <img
           src="logo.png"
@@ -52,7 +65,7 @@ export default function App() {
       </header>
       <main
         className={cn(
-          "flex flex-col items-center justify-center h-[calc(100vh-130px)] relative",
+          "flex flex-col items-center justify-center w-full h-full relative",
           (!isFinal || name) &&
             "bg-gradient-to-r from-[#00953B] via-[#76BC21] to-[#C1D116]"
         )}
@@ -108,6 +121,28 @@ export default function App() {
           </div>
         )}
       </main>
+      <footer className="bg-white w-full h-[100px] flex items-center justify-around z-50 relative">
+        <img
+          src="dah-logo.png"
+          alt="Logo DAH"
+          className="h-[50px] object-contain bg-transparent mix-blend-multiply"
+        />
+        <img
+          src="hoymiles-logo.png"
+          alt="Logo HOYMILES"
+          className="h-[50px] object-contain bg-transparent mix-blend-multiply"
+        />
+        <img
+          src="sungrow-logo.png"
+          alt="Logo SUNGROW"
+          className="h-[50px] object-contain bg-transparent mix-blend-multiply"
+        />
+        <img
+          src="solis-logo.png"
+          alt="Logo SOLIS"
+          className="h-[50px] object-contain bg-transparent mix-blend-multiply"
+        />
+      </footer>
     </>
   );
 }
