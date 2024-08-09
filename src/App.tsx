@@ -40,7 +40,7 @@ export default function App() {
       setNames(newNames);
     }, 5 * 1000);
   };
-  useEventListener("visibilitychange", () => {
+  useEventListener("visibilitychange" as keyof WindowEventMap, () => {
     if (document.visibilityState === "visible") {
       setCancelAnimation(false);
     } else {
