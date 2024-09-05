@@ -9,5 +9,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/sorteador-de-nomes",
+  base: "/sorteador-frase-setembro-amarelo",
 });

@@ -1,9 +1,9 @@
 {
-  "name": "sorteador-de-nomes",
+  "name": "sorteador-frase-setembro-amarelo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://nzero-labs.github.io/sorteador-de-nomes",
+  "homepage": "https://github.com/NZero-Labs/sorteador-frase-setembro-amarelo",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

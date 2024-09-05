@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./index.css";
 import { Card } from "@/components/ui/card";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
@@ -47,6 +47,8 @@ export default function App() {
       setCancelAnimation(true);
     }
   });
+  const isBuilding = true;
+  if (isBuilding) return <React.Fragment> Em Construção!</React.Fragment>;
   return (
     <>
       {isFinal && !cancelAnimation && <Fireworks autorun={{ speed: 3 }} />}
