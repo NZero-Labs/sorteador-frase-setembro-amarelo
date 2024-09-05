@@ -1,5 +1,4 @@
 import { DataProps } from "@/App";
-import { CsvImporter } from "@/components/csv-importer";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -11,13 +10,12 @@ interface ActionsProps {
 }
 export default function Actions({
   names,
-  setNames,
   randomizeName,
   isNewChance = false,
 }: ActionsProps) {
   return (
-    <div className="flex items-center justify-center gap-4">
-      <CsvImporter
+    <div className="flex flex-col items-center justify-center gap-4">
+      {/* <CsvImporter
         fields={[
           { label: "Name", value: "name", required: true },
           { label: "Empresa", value: "corporation", required: true },
@@ -40,19 +38,20 @@ export default function Actions({
 
           setNames((prev) => [...prev, ...formattedData]);
         }}
-      />
+      /> */}
       <Button
-        variant="outline"
-        className="text-[#76BC21] hover:text-[#76BC21] text-[35px] w-[880px] font-medium h-fit"
+        variant="primary"
+        className="text-[35px] w-[880px] hover:bg-[#EECA5C] font-medium h-fit"
         onClick={() =>
           names.length > 0
             ? randomizeName()
             : toast.error("Por favor forneça uma lista de nomes")
         }
       >
-        {isNewChance ? "SORTEAR NOVAMENTE!" : "SORTEAR VENCEDOR!"}&nbsp;
+        {isNewChance ? "SORTEAR NOVAMENTE!" : "SORTEAR FRASE!"}&nbsp;
         {names.length > 0 && `(${names.length})`}
       </Button>
+      <p>Clique aqui e retire uma frase para te inspirar e motivar!</p>
     </div>
   );
 }

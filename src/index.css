@@ -12,6 +12,7 @@
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
+    --primary-yellow: 46, 82%, 47%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
@@ -40,6 +41,7 @@
     --popover-foreground: 210 40% 98%;
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-yellow: 46, 82%, 47%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -79,7 +81,12 @@ html {
   font-family: Roboto, sans-serif;
 }
 .gradient-bg {
-  background: conic-gradient(from 0deg, #00953b, #76bc21, #c1d116);
+  background: conic-gradient(
+    from 0deg,
+    rgba(230, 178, 10, 0.45),
+    rgba(234, 190, 51, 0.45),
+    rgba(255, 225, 134, 0.45)
+  );
   animation: rotate 1s linear infinite;
   width: 300vw;
   height: 300vh;
@@ -126,4 +133,15 @@ body {
 canvas {
   z-index: 100;
   background-color: transparent;
+}
+
+.gradient-phrase {
+  background: linear-gradient(
+    180deg,
+    rgba(230, 178, 10, 1) 0%,
+    rgba(238, 202, 92, 1) 50%
+  );
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
 }
