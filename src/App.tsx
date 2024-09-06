@@ -5,25 +5,29 @@ import { Card } from "@/components/ui/card";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import Actions from "@/components/actions";
 import { useEventListener } from "@/hooks/use-event-listener";
+import phrases from "./data/phrases.json";
+import {
+  BrowserView,
+  MobileView,
+  isMobile,
+  isTablet,
+} from "react-device-detect";
+
 export type DataProps = Array<{
   frase: string;
 }>;
 export default function App() {
   const [name, setName] = useState<DataProps[number] | undefined>();
-  const [names, setNames] = useState<DataProps>([
-    { frase: "Você é o melhor" },
-    { frase: "Você é o melhor 2" },
-    { frase: "Você é o melhor 3" },
-  ]);
+  const [names, setNames] = useState<DataProps>(phrases);
   const [showEditor, setShowEditor] = useState(true);
   const [isFinal, setIsFinal] = useState(false);
   const [cancelAnimation, setCancelAnimation] = useState(false);
   console.log("🚀 ~ App ~ cancelAnimation:", cancelAnimation);
   const [isLoading, setIsLoading] = useState(false);
   const [autoCounter, setAutoCounter] = useState(3);
-
+  const isMobileDevice = isMobile || isTablet;
   const randomizeName = () => {
-    let index = Math.floor(Math.random() * names.length);
+    const index = Math.floor(Math.random() * names.length);
     setIsFinal(false);
     setIsLoading(true);
     setShowEditor(false);
@@ -52,20 +56,71 @@ export default function App() {
   });
 
   return (
-    <>
+    <React.Fragment>
       {isFinal && !cancelAnimation && <Fireworks autorun={{ speed: 3 }} />}
-      <header className="bg-white w-full h-[130px] flex items-center justify-center z-50 relative">
-        <img
-          className="absolute left-0 top-0"
-          src="flowerTop.png"
-          alt="girasol"
-        />
+      <header
+        className={`${
+          isMobileDevice ? "h-[70px]" : "h-[130px]"
+        } bg-white w-full flex items-center justify-center z-50 relative`}
+      >
+        <BrowserView>
+          <img
+            className="absolute left-0 top-0"
+            src="flowerTop.png"
+            alt="girasol"
+          />
+          {name && (
+            <img
+              className="absolute right-0 top-0 -scale-x-100"
+              src="flowerTop.png"
+              alt="girasol"
+            />
+          )}
+        </BrowserView>
+
+        <MobileView>
+          {!name && (
+            <React.Fragment>
+              <img
+                className="absolute left-0 top-0"
+                src="flowerTopMobile.png"
+                alt="girasol"
+              />
+
+              <img
+                className="absolute right-0 top-0 -scale-x-100"
+                src="flowerTopMobile.png"
+                alt="girasol"
+              />
+            </React.Fragment>
+          )}
+          {name && (
+            <img
+              className="absolute top-[70px] right-0 -scale-y-100"
+              src="flowerBottomMobile.png"
+              alt="girasol"
+            />
+          )}
+        </MobileView>
 
         <img
           src="logo.png"
           alt="Logo Amara"
-          className="h-[100px] object-contain"
+          className={`${
+            isMobileDevice
+              ? "h-[50px] object-contain"
+              : "h-[100px] object-contain"
+          }`}
         />
+        {isLoading && !isMobileDevice && (
+          <div className="flex flex-col text-[60px] font-normal text-center text-white tracking-wide">
+            <img
+              className="h-[100px] object-contain"
+              src="septemberYellowLogo.png"
+              alt="Logo Setembro Amarelo"
+            />
+          </div>
+        )}
         {isFinal && (
           <div className="flex flex-col text-[30px] text-center text-[#00953b]"></div>
         )}
@@ -75,42 +130,114 @@ export default function App() {
           "flex flex-col items-center justify-center w-full h-full relative bg-app-background"
         )}
       >
-        {name && (
-          <div className="w-full h-full flex flex-col items-center justify-center gap-10 p-10">
-            <p className="text-white font-bold text-[50px]">Parabéns!</p>
-            <Card className="w-full min-w-full overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2">
-              <p className="gradient-phrase text-[80px] text-wrap text-center break-all">
-                {name?.frase}
-              </p>
-            </Card>
-            <p className="border-b-2 text-white font-bold text-[50px]">
-              Você foi o vencedor do Sorteio!
-            </p>
-            <Actions
-              names={names}
-              setNames={setNames}
-              randomizeName={randomizeName}
-              isNewChance
-            />
+        {name && !isLoading && (
+          <div className="w-full h-full flex flex-col items-center justify-center gap-10 p-10 relative">
+            <div className="flex flex-col text-[60px] font-normal text-center text-white tracking-wide">
+              <img
+                src="septemberYellowLogo.png"
+                alt="Logo Setembro Amarelo"
+                className="w-[145px]"
+              />
+            </div>
+            <BrowserView>
+              <Card className="h-[122px] w-[1175px] overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2 px-[134px] py-[89px]">
+                <p className="gradient-phrase text-[50px] font-extrabold text-wrap text-center">
+                  {name?.frase}
+                </p>
+              </Card>
+              <div className="absolute bottom-10 text-center">
+                <h3 className="text-[hsl(var(--primary-yellow))] text-[37px] font-bold">
+                  Setembro Amarelo - Mês de Prevenção ao Suicídio
+                </h3>
+                <p className="text-[27px] m-0 ">
+                  Se precisar, peça ajuda! (Disque 188 - Centro de Valorização
+                  da Vida)
+                </p>
+              </div>
+            </BrowserView>
+            <MobileView>
+              <Card className="h-[300px] w-[237px] overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2 px-[29px] py-[78px]">
+                <p className="gradient-phrase text-[20px] font-extrabold text-wrap text-center ">
+                  {name?.frase}
+                </p>
+              </Card>
+              <div className="absolute text-center w-[230px]">
+                <h3 className="text-[hsl(var(--primary-yellow))] text-[10px] font-bold">
+                  Setembro Amarelo - Mês de Prevenção ao Suicídio
+                </h3>
+                <p className="text-[10px] m-0 ">
+                  Se precisar, peça ajuda! (Disque 188 - Centro de Valorização
+                  da Vida)
+                </p>
+              </div>
+            </MobileView>
           </div>
         )}
         {isLoading && (
           <>
             <div className="gradient-bg"></div>
-            <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
-              <div className="bg-white/50 rounded-full border-2 border-[#E6B20A] font-bold p-10 z-10 text-[250px] min-w-[450px] text-[#E6B20A] text-center">
+            <div
+              className={`${
+                isMobileDevice ? "justify-around" : "justify-center"
+              } flex flex-col absolute top-0 left-0 items-center w-full h-full`}
+            >
+              <MobileView>
+                <div className="flex flex-col text-[60px] font-normal text-center text-white tracking-wide">
+                  <img
+                    src="septemberYellowLogoWhite.png"
+                    alt="Logo Setembro Amarelo"
+                    className="w-[238px]"
+                  />
+                </div>
+              </MobileView>
+              <div
+                className={`${
+                  isMobileDevice
+                    ? "text-[109px] min-w-[220px] p-[2rem]"
+                    : "text-[250px] min-w-[450px] p-10"
+                } bg-white/50 rounded-full border-2 border-[#E6B20A] font-bold  z-10  text-[#E6B20A] text-center`}
+              >
                 {autoCounter}
               </div>
+              <BrowserView>
+                <div className="text-center">
+                  <h3 className="text-black text-opacity-45 text-[37px] font-bold ">
+                    Setembro Amarelo - Mês de Prevenção ao Suicídio
+                  </h3>
+                  <p className="text-black text-opacity-45 text-[27px] m-0 ">
+                    Se precisar, peça ajuda! (Disque 188 - Centro de Valorização
+                    da Vida)
+                  </p>
+                </div>
+              </BrowserView>
+              <MobileView>
+                <div
+                  className={`text-center items-start justify-between mb-20 bg-inherit w-full h-[100px] flex z-50 relative`}
+                >
+                  <div>
+                    <h3
+                      className={`text-[hsl(var(--primary-yellow))] text-[10px] font-bold`}
+                    >
+                      Setembro Amarelo - Mês de Prevenção ao Suicídio
+                    </h3>
+                    <p className={`text-[10px] m-0`}>
+                      Se precisar, peça ajuda! (Disque 188 - Centro de
+                      Valorização da Vida)
+                    </p>
+                  </div>
+                </div>
+              </MobileView>
             </div>
           </>
         )}
-        {!isLoading && (
+        {!isLoading && !name && (
           <React.Fragment>
             <div className="w-full h-full flex flex-col items-center justify-center p-5 gap-10">
               <div className="flex flex-col text-[60px] font-normal text-center text-white tracking-wide">
                 <img
                   src="septemberYellowLogo.png"
                   alt="Logo Setembro Amarelo"
+                  className={`${isMobileDevice ?? "w-[238px]"}`}
                 />
               </div>
               {showEditor && (
@@ -118,31 +245,83 @@ export default function App() {
                   names={names}
                   setNames={setNames}
                   randomizeName={randomizeName}
+                  isMobileDevice={isMobileDevice}
                 />
               )}
+              <MobileView>
+                <div
+                  className={`text-center items-start justify-between mb-20 bg-inherit w-full h-[100px] flex z-50 relative`}
+                >
+                  <div>
+                    <h3
+                      className={`text-[hsl(var(--primary-yellow))] text-[10px] font-bold`}
+                    >
+                      Setembro Amarelo - Mês de Prevenção ao Suicídio
+                    </h3>
+                    <p className={`text-[10px] m-0`}>
+                      Se precisar, peça ajuda! (Disque 188 - Centro de
+                      Valorização da Vida)
+                    </p>
+                  </div>
+                </div>
+              </MobileView>
             </div>
             {showEditor && (
-              <div className="bg-inherit w-full h-[100px] flex items-start justify-between z-50 relative pl-28 mb-20">
-                <div>
-                  <h3 className="text-[hsl(var(--primary-yellow))] text-[28px] font-bold ">
-                    Setembro Amarelo - Mês de Prevenção ao Suicídio
-                  </h3>
-                  <p className="text-[28px] m-0 ">
-                    Se precisar, peça ajuda! (Disque 188 - Centro de Valorização
-                    da Vida)
-                  </p>
+              <BrowserView>
+                <div
+                  className={`items-start justify-between pl-28 mb-20 bg-inherit w-full h-[100px] flex z-50 relative`}
+                >
+                  <div>
+                    <h3
+                      className={`text-[hsl(var(--primary-yellow))] text-[37px] font-bold`}
+                    >
+                      Setembro Amarelo - Mês de Prevenção ao Suicídio
+                    </h3>
+                    <p className={`text-[27px] m-0`}>
+                      Se precisar, peça ajuda! (Disque 188 - Centro de
+                      Valorização da Vida)
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </BrowserView>
             )}
           </React.Fragment>
         )}
+        <BrowserView>
+          <img
+            className={`absolute right-0 bottom-0`}
+            src="flowerBottom.png"
+            alt="girasol"
+          />
+        </BrowserView>
+        <MobileView>
+          <img
+            className={`absolute right-0 bottom-0`}
+            src="flowerBottomMobile.png"
+            alt="girasol"
+          />
+        </MobileView>
 
-        <img
-          className={`absolute right-0 bottom-0`}
-          src="flowerBottom.png"
-          alt="girasol"
-        />
+        {isLoading ||
+          (name && (
+            <React.Fragment>
+              <BrowserView>
+                <img
+                  className={`absolute left-0 bottom-0 -scale-x-100`}
+                  src="flowerBottom.png"
+                  alt="girasol"
+                />
+              </BrowserView>
+              <MobileView>
+                <img
+                  className={`absolute right-0 bottom-0`}
+                  src="flowerBottomMobile.png"
+                  alt="girasol"
+                />
+              </MobileView>
+            </React.Fragment>
+          ))}
       </main>
-    </>
+    </React.Fragment>
   );
 }

@@ -7,11 +7,13 @@ interface ActionsProps {
   setNames: React.Dispatch<React.SetStateAction<DataProps>>;
   randomizeName: () => void;
   isNewChance?: boolean;
+  isMobileDevice: boolean;
 }
 export default function Actions({
   names,
   randomizeName,
   isNewChance = false,
+  isMobileDevice,
 }: ActionsProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
@@ -41,7 +43,11 @@ export default function Actions({
       /> */}
       <Button
         variant="primary"
-        className="text-[35px] w-[880px] hover:bg-[#EECA5C] font-medium h-fit"
+        className={`${
+          isMobileDevice
+            ? "text-[40px] w-[250px] h-[123px] text-wrap text-center"
+            : "text-[70px] w-[983px] h-[165px]"
+        }   hover:bg-[#EECA5C] font-medium`}
         onClick={() =>
           names.length > 0
             ? randomizeName()
@@ -49,9 +55,14 @@ export default function Actions({
         }
       >
         {isNewChance ? "SORTEAR NOVAMENTE!" : "SORTEAR FRASE!"}&nbsp;
-        {names.length > 0 && `(${names.length})`}
       </Button>
-      <p>Clique aqui e retire uma frase para te inspirar e motivar!</p>
+      <p
+        className={`${
+          isMobileDevice ? "text-[15px] text-wrap text-center" : "text-[25px]"
+        }`}
+      >
+        Clique aqui e retire uma frase para te inspirar e motivar!
+      </p>
     </div>
   );
 }
