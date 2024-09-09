@@ -57,7 +57,9 @@ export default function App() {
 
   return (
     <React.Fragment>
-      {isFinal && !cancelAnimation && <Fireworks autorun={{ speed: 3 }} />}
+      {isFinal && !cancelAnimation && !isMobileDevice && (
+        <Fireworks autorun={{ speed: 3 }} />
+      )}
       <header
         className={`${
           isMobileDevice ? "h-[70px]" : "h-[130px]"
@@ -145,7 +147,7 @@ export default function App() {
                   {name?.frase}
                 </p>
               </Card>
-              <div className="absolute bottom-10 text-center">
+              <div className="mt-14 text-center">
                 <h3 className="text-[hsl(var(--primary-yellow))] text-[37px] font-bold">
                   Setembro Amarelo - Mês de Prevenção ao Suicídio
                 </h3>
