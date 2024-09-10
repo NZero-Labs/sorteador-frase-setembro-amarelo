@@ -138,12 +138,12 @@ export default function App() {
               <img
                 src="septemberYellowLogo.png"
                 alt="Logo Setembro Amarelo"
-                className="w-[145px]"
+                className={`${isMobileDevice ? "w-[145px]" : "w-[80%]"}`}
               />
             </div>
             <BrowserView>
-              <Card className="h-[122px] w-[1175px] overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2 px-[134px] py-[89px]">
-                <p className="gradient-phrase text-[50px] font-extrabold text-wrap text-center">
+              <Card className="h-[200px] w-[1175px] overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2 px-[134px] py-[89px]">
+                <p className="gradient-phrase text-[45px] font-extrabold text-wrap text-center">
                   {name?.frase}
                 </p>
               </Card>
@@ -157,8 +157,11 @@ export default function App() {
                 </p>
               </div>
             </BrowserView>
-            <MobileView>
-              <Card className="h-[300px] w-[237px] overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2 px-[29px] py-[78px]">
+            <MobileView className="flex flex-col justify-center items-center">
+              <Card
+                className="p-2
+               overflow-hidden word flex flex-col items-center justify-center border-[#00953B] border-2 "
+              >
                 <p className="gradient-phrase text-[20px] font-extrabold text-wrap text-center ">
                   {name?.frase}
                 </p>
