@@ -98,7 +98,7 @@ export default function App() {
           )}
           {name && (
             <img
-              className="absolute top-[70px] right-0 -scale-y-100"
+              className="absolute top-[69px]  -scale-y-100"
               src="flowerBottomMobile.png"
               alt="girasol"
             />
@@ -166,7 +166,7 @@ export default function App() {
                   {name?.frase}
                 </p>
               </Card>
-              <div className="absolute text-center w-[230px]">
+              <div className="text-center w-[230px]">
                 <h3 className="text-[hsl(var(--primary-yellow))] text-[10px] font-bold">
                   Setembro Amarelo - Mês de Prevenção ao Suicídio
                 </h3>
